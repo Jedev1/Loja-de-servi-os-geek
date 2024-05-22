@@ -1,113 +1,101 @@
-<!doctype html>
-
-<html>
-
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./src/img/logos/logo.jpg" type="image/x-icon">
+
+    <!--Box icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Login</title>
-    <link rel="stylesheet" href="./src/css/index.css">
-    <link rel="stylesheet" href="./src/css/global.css">
+    <link rel="stylesheet" href="./src/css/login.css">
 </head>
-
 <body>
-    <form>
-        <div class="form-field">
-            <div><label>Email</label></div>
-            <input type="email" name="email" id="email" placeholder="seu@email.com" onchange="onChangeEmail()"/>
-            <div class="error" id="email-required-error">Email é obrigatório</div>
-            <div class="error" id="email-invalid-error">Email é inválido</div>
+
+    <div class="container">
+        <div class="cadastrar-login">
+            <!--Login-->
+            <form action="" class="login-form">
+                <h2 class="titulo">Login</h2>
+                <div class="input-field">
+                    <i class='bx bx-user-circle'></i>
+                    <input type="text" placeholder="Usuario">
+                </div>
+                <div class="input-field">
+                    <i class='bx bxs-lock-alt'></i>
+                    <input type="text" placeholder="Senha">
+                </div>
+
+                <input type="submit" value="Login" class="btn">
+                <p class="social-texto">Ou faça login com suas redes sociais</p>
+                <div class="midias-sociais">
+                    <a href="#" class="social-icon">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class='bx bxl-twitter' ></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class='bx bxl-google' ></i>
+                    </a>
+                </div>
+            </form>
+
+            <!--Cadastrar-->
+
+            <form action="" class="cadastrar-form">
+                <h2 class="titulo">Cadastrar</h2>
+                <div class="input-field">
+                    <i class='bx bx-user-circle'></i>
+                    <input type="text" placeholder="Usuario">
+                </div>
+
+                <div class="input-field">
+                    <i class='bx bxs-envelope' ></i>
+                    <input type="text" placeholder="E-mail">
+                </div>
+
+                <div class="input-field">
+                    <i class='bx bxs-lock-alt'></i>
+                    <input type="text" placeholder="Senha">
+                </div>
+
+                <input type="submit" value="cadastrar" class="btn">
+                <p class="social-texto">Ou se cadastre com suas redes sociais</p>
+                <div class="midias-sociais">
+                    <a href="#" class="social-icon">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class='bx bxl-twitter' ></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class='bx bxl-google' ></i>
+                    </a>
+                </div>
+            </form>
         </div>
-        <div class="form-field">
-            <div><label>Senha</label></div>
-            <input type="password" name="password" id="password" placeholder="Senha" onchange="onChangePassword()"/>
-            <div class="error" id="password-required-error">Senha é obrigatória</div>
+        
+        <div class="painel-container">
+            <div class="painel painel-esquerda">
+                <div class="content">
+                    <h3>É novo aqui?</h3>
+                    <p>Inscreva-se e se aventure pelo site nerd feito para você!</p>
+                    <button class="btn" id="cadastrar-btn">Cadastrar</button>
+                </div>
+                <img src="./src/img/logos/logo.jpg" alt="logo" class="image">
+            </div>
+
+            <div class="painel painel-direita">
+                <div class="content">
+                    <h3>Ja possui conta</h3>
+                    <p>Inscreva-se e se aventure pelo site nerd feito para você!</p>
+                    <button class="btn" id="login-btn">Login</button>
+                </div>
+                <img src="./src/img/logos/logo.jpg" alt="logo" class="image">
+            </div>
         </div>
-        <div>
-            <button type="button" class="clear" id="recover-password-button">Recuperar senha</button>
-        </div>
-        <div>
-            <button type="button" class="solid" id="login" value = "Login">Entrar</button>
-        </div>
-        <div>
-            <button type="button" class="outline" id = "signUp" value = "Sign Up">Registrar</button>
-        </div>
-    </form>
+    </div>
+    <script src="./src/js/login.js"></script>
 </body>
-
-
-
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyDEGJ1CIe_PqIhhArUMASl6cYAJIyoG2Nc",
-      authDomain: "carlinhosloja-f7fef.firebaseapp.com",
-      databaseURL: "https://carlinhosloja-f7fef-default-rtdb.firebaseio.com",
-      projectId: "carlinhosloja-f7fef",
-      storageBucket: "carlinhosloja-f7fef.appspot.com",
-      messagingSenderId: "323085498674",
-      appId: "1:323085498674:web:8f19b6b9d1f88a9a5ebf2b",
-      measurementId: "G-HREJ4NXB0B"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app)
-    const auth = getAuth();
-
-    signUp.addEventListener('click', (e) => {
-        var email = document.getElementById('email').value
-        var password = document.getElementById('password').value
-        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-
-        set(ref(database, 'user/' + user.uid),{
-            email: email,
-            password: password
-        })
-        window.location.href = "index.html"; 
-        // ...
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-        alert(errorMessage)
-    });
-        })
-
-    login.addEventListener('click', (e) => {
-        var email = document.getElementById('email').value
-        var password = document.getElementById('password').value
-
-        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-            // ...
-        const dt = new Date();
-        update(ref(database, 'users/' + user.uid), {
-            last_login: dt,
-        })
-        window.location.href = "index.html";
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage)
-    });
-    })
-    
-
-    
-
-  </script>
-
 </html>
